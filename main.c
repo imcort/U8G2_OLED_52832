@@ -64,8 +64,8 @@
 /* TWI instance ID. */
 #define TWI_INSTANCE_ID     0
 
-#define ARDUINO_SCL_PIN     8
-#define ARDUINO_SDA_PIN     6
+#define SCL_PIN     28
+#define SDA_PIN     30
 
 /* Indicates if operation on TWI has ended. */
 static volatile bool m_xfer_done = false;
@@ -97,8 +97,8 @@ void twi_init (void)
     ret_code_t err_code;
 
     const nrf_drv_twi_config_t twi_oled_config = {
-       .scl                = ARDUINO_SCL_PIN,
-       .sda                = ARDUINO_SDA_PIN,
+       .scl                = SCL_PIN,
+       .sda                = SDA_PIN,
        .frequency          = NRF_DRV_TWI_FREQ_100K,
        .interrupt_priority = APP_IRQ_PRIORITY_HIGH,
        .clear_bus_init     = false
@@ -173,25 +173,27 @@ void draw(u8g2_t *u8g2)
 {
     u8g2_SetFontMode(u8g2, 1);  // Transparent
     u8g2_SetFontDirection(u8g2, 0);
-    u8g2_SetFont(u8g2, u8g2_font_inb24_mf);
-    u8g2_DrawStr(u8g2, 0, 20, "U");
+		u8g2_SetFontPosTop(u8g2);
+    u8g2_SetFont(u8g2, u8g2_font_wqy12_t_chinese2);
+    u8g2_DrawUTF8(u8g2, 0, 17, "Test");
+		u8g2_DrawUTF8(u8g2, 0, 0, "TJUBMFE");
     
-    u8g2_SetFontDirection(u8g2, 1);
-    u8g2_SetFont(u8g2, u8g2_font_inb30_mn);
-    u8g2_DrawStr(u8g2, 21,8,"8");
-        
-    u8g2_SetFontDirection(u8g2, 0);
-    u8g2_SetFont(u8g2, u8g2_font_inb24_mf);
-    u8g2_DrawStr(u8g2, 51,30,"g");
-    u8g2_DrawStr(u8g2, 67,30,"\xb2");
-    
-    u8g2_DrawHLine(u8g2, 2, 35, 47);
-    u8g2_DrawHLine(u8g2, 3, 36, 47);
-    u8g2_DrawVLine(u8g2, 45, 32, 12);
-    u8g2_DrawVLine(u8g2, 46, 33, 12);
-  
-    u8g2_SetFont(u8g2, u8g2_font_4x6_tr);
-    u8g2_DrawStr(u8g2, 1,54,"github.com/olikraus/u8g2");
+//    u8g2_SetFontDirection(u8g2, 1);
+//    u8g2_SetFont(u8g2, u8g2_font_inb30_mn);
+//    u8g2_DrawStr(u8g2, 21,8,"8");
+//        
+//    u8g2_SetFontDirection(u8g2, 0);
+//    u8g2_SetFont(u8g2, u8g2_font_inb24_mf);
+//    u8g2_DrawStr(u8g2, 51,30,"g");
+//    u8g2_DrawStr(u8g2, 67,30,"\xb2");
+//    
+//    u8g2_DrawHLine(u8g2, 2, 35, 47);
+//    u8g2_DrawHLine(u8g2, 3, 36, 47);
+//    u8g2_DrawVLine(u8g2, 45, 32, 12);
+//    u8g2_DrawVLine(u8g2, 46, 33, 12);
+//  
+//    u8g2_SetFont(u8g2, u8g2_font_4x6_tr);
+//    u8g2_DrawStr(u8g2, 1,54,"github.com/olikraus/u8g2");
 }
 
 /**
